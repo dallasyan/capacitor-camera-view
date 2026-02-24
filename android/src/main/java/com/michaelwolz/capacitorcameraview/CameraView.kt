@@ -582,7 +582,7 @@ class CameraView(plugin: Plugin) {
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT
                     )
-                scaleType = PreviewView.ScaleType.FILL_CENTER
+                scaleType = PreviewView.ScaleType.FIT_CENTER
             }
 
         (webView.parent as? ViewGroup)?.addView(previewView, 0)
@@ -619,12 +619,10 @@ class CameraView(plugin: Plugin) {
         val controller =
             LifecycleCameraController(context).apply {
                 cameraSelector = currentCameraSelector
-                imageCaptureMode = ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
+                imageCaptureMode = ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
                 imageCaptureResolutionSelector =
                     ResolutionSelector.Builder()
-                        .setAspectRatioStrategy(
-                            AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY
-                        )
+                        .setResolutionStrategy(ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY)
                         .build()
             }
 
